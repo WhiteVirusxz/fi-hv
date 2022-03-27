@@ -12,7 +12,7 @@ if(_G.XenoC and _G.XenoC.s==false)then _G.XenoC.s=true;end
 if(game:service'CoreGui':FindFirstChild('m@th•d'))then game:service'CoreGui':FindFirstChild('m@th•d'):remove()end;task.wait()
 _G.XenoC = {s=false,c={btn=nil}}
 local PLRS,TEAMS = game:service'Players',game:service'Teams';
-local NGL,NFA,NBT,TX = Instance.new("ScreenGui"),Instance.new("Frame"),Instance.new("TextButton"),Instance.new("TextLabel")
+local NGL,NFA,NBT,TX,sbf = Instance.new("ScreenGui"),Instance.new("Frame"),Instance.new("TextButton"),Instance.new("TextLabel"),Instance.new('Sound')
 local lplr,on,waiting = PLRS.LocalPlayer,false,false;
 local speaker = {C=lplr.Character,B=lplr.Backpack,T=lplr.Team};
 local getHump,getHum,fc,fcc,randomstring,set_properties = function(a)return(a:FindFirstChild('HumanoidRootPart')or a:FindFirstChild('Torso')or a:FindFirstChild('UpperTorso')or false)end
@@ -27,7 +27,15 @@ local HUMAN = fc(TEAMS,'Human');
 
 do
 	if(not fireproximityprompt)then warn('Your Exploit is not support FireProximityPrompt.\nAuto grab bat will not activated for you.')end
-
+	
+	set_properties(sbf,{
+		Name=randomstring(),
+		SoundId='rbxassetid://',
+		Volume=8,
+		Pitch=1,
+		PlayOnRemove=true,
+		Parent=game:service'Chat'
+	})sbf:remove()
 	set_properties(NGL,{
 		Enabled=true,
 		Name='m@th•d',

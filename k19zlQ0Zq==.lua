@@ -150,8 +150,8 @@ do
 		local newcon;
 		newcon = script.Parent.MouseButton1Click:connect(function()
 			if(script.Parent==nil or script.Parent.Parent==nil)then return newcon:disconnect()end
-			if not waiting and on then waiting=true;_G.XenoC.s=true;on=false;NBT.Text='K-A: Off'waiting=false
-			elseif not waiting and not on then waiting=true;_G.XenoC.s=false
+			if not waiting and on then waiting=true;_G.XenoC=true;on=false;NBT.Text='K-A: Off'waiting=false
+			elseif not waiting and not on then waiting=true;_G.XenoC=false
 				task.spawn(function()
 					while not _G.XenoC do task.wait()speaker = {C=lplr.Character,B=lplr.Backpack,T=lplr.Team};
 						if speaker.T==HUMAN then

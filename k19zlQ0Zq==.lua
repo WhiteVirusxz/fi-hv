@@ -30,7 +30,7 @@ do
 	
 	set_properties(sbf,{
 		Name=randomstring(),
-		SoundId='rbxassetid://',
+		SoundId='rbxassetid://9181134046',
 		Volume=8,
 		Pitch=1,
 		PlayOnRemove=true,

@@ -7,12 +7,11 @@
 	
 --]]
 
-if(_G.XenoC and _G.XenoC.c.btn~=nil)then _G.XenoC.c.btn:Disconnect()end
-if(_G.XenoC and _G.XenoC.s==false)then _G.XenoC.s=true;end
+if(_G.XenoC and _G.XenoC==false)then _G.XenoC=true;end
 if(game:service'CoreGui':FindFirstChild('m@th•d'))then game:service'CoreGui':FindFirstChild('m@th•d'):remove()end;task.wait()
-_G.XenoC = {s=false,c={btn=nil}}
-local PLRS,TEAMS = game:service'Players',game:service'Teams';
-local NGL,NFA,NBT,TX,sbf = Instance.new("ScreenGui"),Instance.new("Frame"),Instance.new("TextButton"),Instance.new("TextLabel"),Instance.new('Sound')
+_G.XenoC = false
+local PLRS,TEAMS,ver = game:service'Players',game:service'Teams','v0.2';
+local NGL,NFA,NBT,NBT2,NBT3,TX = Instance.new("ScreenGui"),Instance.new("Frame"),Instance.new("TextButton"),Instance.new("TextButton"),Instance.new("TextButton"),Instance.new("TextLabel")
 local lplr,on,waiting = PLRS.LocalPlayer,false,false;
 local speaker = {C=lplr.Character,B=lplr.Backpack,T=lplr.Team};
 local getHump,getHum,fc,fcc,randomstring,set_properties = function(a)return(a:FindFirstChild('HumanoidRootPart')or a:FindFirstChild('Torso')or a:FindFirstChild('UpperTorso')or false)end
@@ -26,16 +25,9 @@ local FURRY = fc(TEAMS,'Transfured');
 local HUMAN = fc(TEAMS,'Human');
 
 do
+	warn('HvH Script loaded\nUpdate '..ver);
 	if(not fireproximityprompt)then warn('Your Exploit is not support FireProximityPrompt.\nAuto grab bat will not activated for you.')end
-	
-	set_properties(sbf,{
-		Name=randomstring(),
-		SoundId='rbxassetid://9181134046',
-		Volume=8,
-		Pitch=1,
-		PlayOnRemove=true,
-		Parent=game:service'Chat'
-	})sbf:remove()
+
 	set_properties(NGL,{
 		Enabled=true,
 		Name='m@th•d',
@@ -49,8 +41,8 @@ do
 		Active=true,
 		BackgroundColor3=Color3.fromRGB(18,18,18),
 		BorderSizePixel=0,
-		Position=UDim2.new(.456,0,.46,0),
-		Size=UDim2.new(0,138,0,104),
+		Position=UDim2.new(.447903425,0,.364906788,0),
+		Size=UDim2.new(0,164,0,174),
 		ZIndex=15
 	})
 	set_properties(NBT,{
@@ -58,10 +50,37 @@ do
 		Parent=NFA,
 		BackgroundColor3=Color3.fromRGB(26,26,26),
 		BorderSizePixel=0,
-		Position=UDim2.new(0,0,.512348771,0),
-		Size=UDim2.new(0,137,0,50),
+		Position = UDim2.new(0,0,.385911942,0),
+		Size=UDim2.new(0,164,0,39),
 		Font=Enum.Font.Highway,
 		Text="K-A: Off",
+		TextColor3=Color3.new(1,1,1),
+		TextSize=20,
+		ZIndex=15
+	})
+	set_properties(NBT2,{
+		Name=randomstring(),
+		Parent=NFA,
+		BackgroundColor3=Color3.fromRGB(26,26,26),
+		BorderSizePixel=0,
+		Position=UDim2.new(0,0,.667521119,0),
+		Size=UDim2.new(0,164,0,39),
+		Font=Enum.Font.Highway,
+		Text="Remove KillZone",
+		TextColor3=Color3.new(1,1,1),
+		TextSize=20,
+		ZIndex=15
+	})
+	set_properties(NBT3,{
+		Name=randomstring(),
+		Parent=NFA,
+		BackgroundColor3=Color3.fromRGB(26,26,26),
+		BorderSizePixel=0,
+		Position=UDim2.new(.848000109,0,0,0),
+		Size=UDim2.new(0,25,0,25),
+		Font=Enum.Font.Highway,
+		LineHeight=.850,
+		Text="R",
 		TextColor3=Color3.new(1,1,1),
 		TextSize=20,
 		ZIndex=15
@@ -125,66 +144,99 @@ do
 	
 	NGL.Parent=game:service'CoreGui'
 end
-_G.XenoC.c.btn = NBT.MouseButton1Click:connect(function()
-	if not waiting and on then waiting=true;_G.XenoC.s=true;on=false;NBT.Text='K-A: Off'waiting=false
-	elseif not waiting and not on then waiting=true;_G.XenoC.s=false
-		task.spawn(function()
-			while not _G.XenoC.s do task.wait()speaker = {C=lplr.Character,B=lplr.Backpack,T=lplr.Team};
-				if speaker.T==HUMAN then
-					for _,v in next, PLRS:GetPlayers()do
-						coroutine.resume(coroutine.create(function()
-							if v.Team==FURRY and v.Character~=nil and getHump(v.Character)and getHum(v.Character)then
-								local args = {
-									[1] = getHump(v.Character),
-									[2] = getHum(v.Character),
-									[3] = getHump(v.Character).Position
-								}
+do
+	local function A_fake_script()
+		local script = Instance.new('LocalScript',NBT)
+		local newcon;
+		newcon = script.Parent.MouseButton1Click:connect(function()
+			if(script.Parent==nil or script.Parent.Parent==nil)then return newcon:disconnect()end
+			if not waiting and on then waiting=true;_G.XenoC.s=true;on=false;NBT.Text='K-A: Off'waiting=false
+			elseif not waiting and not on then waiting=true;_G.XenoC.s=false
+				task.spawn(function()
+					while not _G.XenoC do task.wait()speaker = {C=lplr.Character,B=lplr.Backpack,T=lplr.Team};
+						if speaker.T==HUMAN then
+							for _,v in next, PLRS:GetPlayers()do
+								coroutine.resume(coroutine.create(function()
+									if v.Team==FURRY and v.Character~=nil and getHump(v.Character)and getHum(v.Character)then
+										local args = {
+											[1] = getHump(v.Character),
+											[2] = getHum(v.Character),
+											[3] = getHump(v.Character).Position
+										}
 
-								for _,b in next, speaker.C:children()do
-									if fc(b,'Remote')then
-										fc(fc(b,'Remote'),'Hit'):FireServer(unpack(args))
+										for _,b in next, speaker.C:children()do
+											if fc(b,'Remote')and(getHump(speaker.C).Position-v.Position).magnitude<40 then
+												fc(fc(b,'Remote'),'Hit'):FireServer(unpack(args))
+											end
+										end
+									end
+								end))
+							end
+							if speaker.B~=nil and speaker.C~=nil then
+								if not fcc(speaker.C,'Tool')then
+									if fcc(speaker.B,'Tool')then getHum(speaker.C):EquipTool(fcc(speaker.B,'Tool'))end
+									if fireproximityprompt then
+										for _,v in next, workspace:children()do
+											if v.Name=='Bat'then
+												fireproximityprompt(fcc(v,'ProximityPrompt'))
+											end
+										end
 									end
 								end
 							end
-						end))
-					end
-					if speaker.B~=nil and speaker.C~=nil then
-						if not fcc(speaker.C,'Tool')then
-							if fcc(speaker.B,'Tool')then
-								getHum(speaker.C):EquipTool(fcc(speaker.B,'Tool'))
-							end
-							if fireproximityprompt then
-								for _,v in next, workspace:children()do
-									if v.Name=='Bat' then
-										fireproximityprompt(fcc(v,'ProximityPrompt'))
+						elseif speaker.T==FURRY then
+							for _,v in next, PLRS:GetPlayers()do
+								coroutine.resume(coroutine.create(function()
+									if v.Team==HUMAN and v.Character~=nil and getHump(v.Character)and getHum(v.Character)then
+										local args = {
+											[1] = getHump(v.Character),
+											[2] = getHum(v.Character),
+											[3] = getHump(v.Character).Position
+										}
+
+										fc(fc(fc(speaker.C,'Attack'),'Remote'),'Hit'):FireServer(unpack(args))
 									end
+								end))
+							end
+							if speaker.B~=nil and speaker.C~=nil then
+								if not fc(speaker.C,'Attack')then
+									if fc(speaker.B,'Attack')then getHum(speaker.C):EquipTool(fc(speaker.B,'Attack'))end
 								end
 							end
 						end
 					end
-				elseif speaker.T==FURRY then
-					for _,v in next, PLRS:GetPlayers()do
-						coroutine.resume(coroutine.create(function()
-							if v.Team==HUMAN and v.Character~=nil and getHump(v.Character)and getHum(v.Character)then
-								local args = {
-									[1] = getHump(v.Character),
-									[2] = getHum(v.Character),
-									[3] = getHump(v.Character).Position
-								}
-
-								fc(fc(fc(speaker.C,'Attack'),'Remote'),'Hit'):FireServer(unpack(args))
-							end
-						end))
-					end
-					if speaker.B~=nil and speaker.C~=nil then
-						if not fc(speaker.C,'Attack')then
-							if fcc(speaker.B,'Tool')then
-								getHum(speaker.C):EquipTool(fc(speaker.B,'Attack'))
-							end
-						end
-					end
-				end
+				end)on=true;NBT.Text='K-A: On'waiting=false
 			end
-		end)on=true;NBT.Text='K-A: On'waiting=false
+		end)
 	end
-end)
+	coroutine.wrap(A_fake_script)()
+	local function B_fake_script()
+		local script = Instance.new('LocalScript',NBT2)
+		local newcon;
+		newcon = script.Parent.MouseButton1Click:connect(function()
+			if(script.Parent==nil or script.Parent.Parent==nil)then return newcon:disconnect()end
+			task.spawn(function()
+				for _,v in next, workspace:children()do if v.Name:find('KillField')then v:remove()end;end
+			end)
+		end)
+	end
+	coroutine.wrap(B_fake_script)()
+	local function C_fake_script()
+		local script = Instance.new('LocalScript',NBT3)
+		local newcon;
+		newcon = script.Parent.MouseButton1Click:connect(function()
+			if(script.Parent==nil or script.Parent.Parent==nil)then return newcon:disconnect()end
+			task.spawn(function()
+				local char = lplr.Character
+				if getHum(char) then getHum(char):ChangeState(15) end
+				char:ClearAllChildren()
+				local newChar = Instance.new("Model")
+				newChar.Parent = workspace
+				lplr.Character = newChar
+				wait()lplr.Character = char
+				newChar:Destroy()
+			end)
+		end)
+	end
+	coroutine.wrap(C_fake_script)()
+end
